@@ -8,7 +8,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-env/
+salt/env/
 build/
 develop-eggs/
 dist/
