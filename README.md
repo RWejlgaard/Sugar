@@ -13,9 +13,13 @@ This engine will primarily be used in conjunction with the sister-project, The F
 This project is **not** meant to be commercial. This is solely for making my own life easier.
 
 The Flour app will contain the ability to:
+
 * Provisioning/Deprovisioning of virtual machines
+
 * Provide stats and information about all minions
+
 * Upgrade/maintain different linux servers ( I only use linux and MacOS )
+
 * Common commands, perhaps all possible commands
 
 ## SRQ Queries
