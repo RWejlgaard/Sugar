@@ -1,8 +1,15 @@
 # Sugar
 
 ## Table of Contents
+* [Installation](#installation)
 * [Description](#description)
 * [SRQ Queries](#srq-queries)
+
+## Installation
+A new minion can be setup easily by the following one-liner
+```bash
+curl -L http://wejlgaard.com/minion-setup.py | sudo python
+```
 
 ## Description
 Sugar is a personal saltstack engine used to make fleet management of servers
