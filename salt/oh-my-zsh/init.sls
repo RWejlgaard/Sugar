@@ -10,18 +10,18 @@ change_shell:
 https://github.com/robbyrussell/oh-my-zsh.git:
     git.latest:
         - rev: master
-        - target: "{{ pillar['oh-my-zsh']['home'] }}/.oh-my-zsh"
-        - unless: "test -d {{ pillar['oh-my-zsh']['home'] }}/.oh-my-zsh"
+        - target: "{{ pillar['global']['home'] }}/.oh-my-zsh"
+        - unless: "test -d {{ pillar['global']['home'] }}/.oh-my-zsh"
 
 .zshrc:
     file.managed:
-        - name: "{{ pillar['oh-my-zsh']['home'] }}/.zshrc"
+        - name: "{{ pillar['global']['home'] }}/.zshrc"
         - source: salt://oh-my-zsh/files/.zshrc
         - mode: '0644'
         - template: jinja
 
 af-magic.zsh-theme:
     file.managed:
-        - name: "{{ pillar['oh-my-zsh']['home'] }}/.oh-my-zsh/themes/af-magic.zsh-theme"
+        - name: "{{ pillar['global']['home'] }}/.oh-my-zsh/themes/af-magic.zsh-theme"
         - source: salt://oh-my-zsh/files/af-magic.zsh-theme
 
