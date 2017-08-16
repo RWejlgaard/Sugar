@@ -3,10 +3,10 @@
 daemonize {{ redis_settings.daemonize }}
 
 pidfile {{ redis_settings.pidfile }}
-port {{ redis_settings.port }}
+port {{ pillar['redis']['port']}}
 
 {% if redis_settings.bind is defined %}
-bind {{ redis_settings.bind }}
+bind {{ pillar['redis']['bind'] }}
 {% endif -%}
 
 {% if redis_settings.unixsocket is defined %}
