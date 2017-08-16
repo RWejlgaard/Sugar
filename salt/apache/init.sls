@@ -3,8 +3,9 @@ apache2:
         - installed
         - name: apache2
 
-{% for site in pillar['apache']['sites'] %}
+
 {{ pillar['apache']['conf_dir'] }}/apache2.conf:
+    {% for site in pillar['apache']['sites'] %}
     apache.configfile:
         - config:
             - VirtualHost:
@@ -22,4 +23,4 @@ apache2:
                       - Indexes
                       - FollowSymlinks
                     AllowOverride: All
-{% endfor %}
+    {% endfor %}
