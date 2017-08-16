@@ -14,6 +14,11 @@ apache2.conf:
         - source: salt://apache/www
         - include_empty: True
 
+{{ pillar['apache']['www_dir'] }}/cdn:
+    file.directory:
+        - dir_mode: 755
+        - require: {{ pillar['apache']['www_dir'] }}
+
 apache2:
     service.running:
         - enable: True
