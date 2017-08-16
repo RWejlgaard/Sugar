@@ -5,9 +5,9 @@ apache2:
 
 
 {{ pillar['apache']['conf_dir'] }}/apache2.conf:
-    {% for site in pillar['apache']['sites'] %}
     apache.configfile:
         - config:
+            {% for site in pillar['apache']['sites'] %}
             - VirtualHost:
                 this: '*:80'
                 ServerName:
@@ -23,4 +23,4 @@ apache2:
                       - Indexes
                       - FollowSymlinks
                     AllowOverride: All
-    {% endfor %}
+            {% endfor %}
