@@ -1,7 +1,7 @@
 redis:
   root_dir: /var/lib/redis
   user: redis
-  port: 6379
+  port: 1234
   bind: {{ grains['ipv4'][0] }}
   snapshots:
     - '900 1'
