@@ -17,7 +17,8 @@ apache2.conf:
 {{ pillar['apache']['www_dir'] }}/cdn:
     file.directory:
         - dir_mode: 755
-        - require: {{ pillar['apache']['www_dir'] }}
+        - require:
+            - {{ pillar['apache']['www_dir'] }}
 
 apache2:
     service.running:
