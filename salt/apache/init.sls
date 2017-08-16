@@ -4,7 +4,7 @@ apache2:
         - name: apache2
 
 {% for site in pillar['apache']['sites'] %}
-{{ pillar['apache']['conf_dir'] }}/apache2.conf
+{{ pillar['apache']['conf_dir'] }}/apache2.conf:
     apache.configfile:
         - config:
             - VirtualHost:
