@@ -4,5 +4,6 @@ base:
     - tmux
   'ziva':
     - redis
+    - mariadb
     - apache
     - minion-setup
