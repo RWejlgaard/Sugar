@@ -79,7 +79,7 @@ redis_config:
   file.managed:
     - name: {{ cfg_name }}
     - template: jinja
-    - source: salt://redis/files/redis-{{ cfg_version }}.conf.jinja
+    - source: salt://redis/files/redis.conf.jinja
 
 {% if install_from == 'source' %}
 redis-initd:
