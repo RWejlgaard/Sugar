@@ -1,4 +1,4 @@
-apache2:
+install-apache2:
     pkg:
         - installed
         - name: apache2
@@ -13,3 +13,10 @@ apache2.conf:
     file.recurse:
         - source: salt://apache/www
         - include_empty: True
+
+apache2:
+    service.running:
+        - enable: True
+        - reload: True
+        - watch:
+            - pkg: apache2
