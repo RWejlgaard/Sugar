@@ -25,4 +25,4 @@ ssh:
         - reload: True
         - name: ssh
         - require:
-        - pkg: openssh-server
+            - pkg: openssh-server

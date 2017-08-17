@@ -4,6 +4,5 @@ base:
     - redis
     - minion-setup
     - mariadb
-    - openssh
     - apache
     - global
