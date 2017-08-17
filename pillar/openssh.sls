@@ -33,7 +33,7 @@ sshd_config:
   HostbasedAuthentication: 'no'
   PermitEmptyPasswords: 'no'
   ChallengeResponseAuthentication: 'no'
-  AuthenticationMethods: 'publickey,keyboard-interactive'
+  AuthenticationMethods: 'publickey'
   AuthorizedKeysFile: '%h/.ssh/authorized_keys'
   X11Forwarding: 'no'
   X11DisplayOffset: 10
