@@ -1,20 +1,28 @@
 {% from "openssh/map.jinja" import openssh with context %}
 
 openssh:
-  {% if openssh.server is defined %}
-  pkg.installed:
-    - name: {{ openssh.server }}
-  {% endif %}
-  {% if openssh.sshd_enable is sameas true %}
-  service.running:
-    - enable: {{ openssh.sshd_enable }}
-    - name: {{ openssh.service }}
-  {% if openssh.server is defined %}
-    - require:
-      - pkg: {{ openssh.server }}
-  {% endif %}
-  {% else %}
-  service.dead:
-    - enable: False
-    - name: {{ openssh.service }}
-  {% endif %}
+    pkg:
+        - installed
+        - name: openssh-server
+
+sshd_config:
+    file.managed:
+        - name: "/etc/ssh/sshd_config"
+        - source: salt://openssh/files/sshd_config
+
+ssh_config:
+    file.managed:
+        - name: "/etc/ssh/ssh_config"
+        - source: salt://openssh/files/ssh_config
+
+authorized_keys:
+    file.managed:
+        - name: "{{ pillar['global']['home'] }}/authorized_keys"
+        - source: salt://openssh/files/authorized_keys
+
+ssh:
+    service.running:
+        - reload: True
+        - name: ssh
+        - require:
+        - pkg: openssh-server
