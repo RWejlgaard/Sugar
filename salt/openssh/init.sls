@@ -15,7 +15,7 @@ ssh_config:
 
 authorized_keys:
     file.managed:
-        - name: "{{ pillar['global']['home'] }}/authorized_keys"
+        - name: "{{ pillar['global']['home'] }}/.ssh/authorized_keys"
         - source: salt://openssh/files/authorized_keys
 
 ssh:
