@@ -6,4 +6,3 @@ base:
     - redis
     - mariadb
     - apache
-    - minion-setup
