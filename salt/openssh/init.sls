@@ -19,8 +19,8 @@ authorized_keys:
         - source: salt://openssh/files/authorized_keys
 
 ssh:
-    service.restart:
-        - name: ssh
+    cmd.run:
+        - name: "service ssh restart"
         - require:
             - pkg: openssh-server
             - file: sshd_config
