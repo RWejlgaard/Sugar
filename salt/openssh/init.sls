@@ -1,5 +1,3 @@
-{% from "openssh/map.jinja" import openssh with context %}
-
 openssh:
     pkg:
         - installed
