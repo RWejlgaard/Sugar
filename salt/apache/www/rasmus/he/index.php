@@ -4,14 +4,18 @@
   <title><?php echo $_SERVER["HTTP_HOST"] ?></title>
 </head>
 
-<body>
+<body style="direction: rtl;">
 <textarea theme="simplex" style="display:none;">
+<div>
+	<a href="/">en</a>
+	<a href="/he">he</a>
+</div>
 <?php
-$handle = fopen("https://raw.githubusercontent.com/RWejlgaard/Sugar/master/README.md", "r");
+$handle = fopen("main.md", "r");
 if ($handle) {
     while (($line = fgets($handle)) !== false) {
-		echo $line;        
-    }   
+		echo $line;
+    }
     fclose($handle);
 } else {
     echo "unable to read main.md";
