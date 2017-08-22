@@ -1,0 +1,12 @@
+mariadb:
+  version: 'latest'
+  repo_version: '10.1'
+  server:
+<<<<<<< .merge_file_a17732
+    root_password: N2F6jfBm
+=======
+    root_password: ERI2gOZ1OJQ=
+>>>>>>> .merge_file_a21528
+    config:
+      mysqld:
+        bind-address: 0.0.0.0

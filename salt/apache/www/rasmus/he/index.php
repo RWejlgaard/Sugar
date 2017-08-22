@@ -4,10 +4,10 @@
   <title><?php echo $_SERVER["HTTP_HOST"] ?></title>
 </head>
 
-<body>
+<body style="direction: rtl;">
 <textarea theme="simplex" style="display:none;">
 <div>
-	<a href="/">en</a> /
+	<a href="/">en</a>
 	<a href="/he">he</a>
 </div>
 <?php
@@ -22,8 +22,6 @@ if ($handle) {
 }
 ?>
 </textarea>
-
 <script src="http://<?php echo $_SERVER["HTTP_HOST"];?>/v/0.2/strapdown.js"></script>
 </body>
 </html>
-
