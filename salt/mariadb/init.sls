@@ -3,3 +3,4 @@ include:
   - mariadb.install
   - mariadb.server.conf
   - mariadb.server.service
+  - mariadb.setup
