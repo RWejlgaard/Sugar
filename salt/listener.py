@@ -5,7 +5,7 @@ import salt.config
 import salt.utils.event
 import mysql.connector
 
-IGNORE_LIST = ['salt/event/exit']
+IGNORE_LIST = ['salt/event/exit', 'salt/auth']
 
 
 def start_listener():
@@ -37,7 +37,7 @@ def handle_event(e):
             print "Got event\t{}".format(e['tag'])
             con = mysql.connector.connect(user='events', password='N2F6jfBm', host='ymir.wejlgaard.com', database='salt')
             cursor = con.cursor()
-            query = """INSERT INTO events (tag, data) VALUES ("{}", "{}");""".format(str(e['tag']), str(e['data']))
+            query = """INSERT INTO events (time, tag, data) VALUES (now(),"{}", "{}");""".format(str(e['tag']), str(e['data']))
             cursor.execute(query)
             con.commit()
             print "Posted event\t{}".format(e['tag'])
