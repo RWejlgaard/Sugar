@@ -16,21 +16,14 @@ try {
 
 	// Oh no! A connect_errno exists so the connection attempt failed!
 	if ($mysqli->connect_errno) {
-	    echo "Oh no! This website is down. Lets hope it's not the monster who lives in the server closet again. Last time it ate Jimmy"
+	    echo "Oh no! This website is down. Lets hope it's not the monster who lives in the server closet again. Last time it ate Jimmy";
+	    exit;
 	}
 
 	// Perform an SQL query
 	$sql = "SELECT * FROM events ORDER BY id DESC";
 	if (!$result = $mysqli->query($sql)) {
-	    // Oh no! The query failed.
-	    echo "Sorry, the website is experiencing problems.";
-
-	    // Again, do not do this on a public site, but we'll show you how
-	    // to get the error information
-	    echo "Error: Our query failed to execute and here is why: \n";
-	    echo "Query: " . $sql . "\n";
-	    echo "Errno: " . $mysqli->errno . "\n";
-	    echo "Error: " . $mysqli->error . "\n";
+	    echo "Oh no! This website is down. Lets hope it's not the monster who lives in the server closet again. Last time it ate Jimmy";
 	    exit;
 	}
 
