@@ -18,6 +18,9 @@ authorized_keys:
         - name: "{{ pillar['global']['home'] }}/.ssh/authorized_keys"
         - source: salt://openssh/files/authorized_keys
 
+include:
+    - openssh.motd
+
 ssh:
     cmd.run:
         - name: "service ssh restart"
