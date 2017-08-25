@@ -2,7 +2,7 @@
 
 . /etc/update-motd.d/colors
 
-printf "\n"$LIGHT_RED
-figlet "  "$(hostname -s)
+printf "\n"$LIGHT_GREEN
+figlet -f script "  "$(hostname -s)
 printf $NONE
 printf "\n"

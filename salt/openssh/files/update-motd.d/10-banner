@@ -18,24 +18,24 @@
 #    You should have received a copy of the GNU General Public License along
 #    with this program; if not, write to the Free Software Foundation, Inc.,
 #    51 Franklin Street, Fifth Floor, Boston, MA 02110-1301 USA.
-
-# Modified by Luc Didry in 2016
-
-. /etc/update-motd.d/colors
-
-[ -r /etc/update-motd.d/lsb-release ] && . /etc/update-motd.d/lsb-release
-
-if [ -z "$DISTRIB_DESCRIPTION" ] && [ -x /usr/bin/lsb_release ]; then
-    # Fall back to using the very slow lsb_release utility
-    DISTRIB_DESCRIPTION=$(lsb_release -s -d)
-fi
-
-re='(.*\()(.*)(\).*)'
-if [[ $DISTRIB_DESCRIPTION =~ $re ]]; then
-    DISTRIB_DESCRIPTION=$(printf "%s%s%s%s%s" "${BASH_REMATCH[1]}" "${YELLOW}" "${BASH_REMATCH[2]}" "${NONE}" "${BASH_REMATCH[3]}")
-fi
-
-echo -e "  "$DISTRIB_DESCRIPTION "(kernel "$(uname -r)")\n"
-
-# Update the information for next time
-printf "DISTRIB_DESCRIPTION=%s" "$(lsb_release -s -d)" > /etc/update-motd.d/lsb-release &
+#
+## Modified by Luc Didry in 2016
+#
+#. /etc/update-motd.d/colors
+#
+#[ -r /etc/update-motd.d/lsb-release ] && . /etc/update-motd.d/lsb-release
+#
+#if [ -z "$DISTRIB_DESCRIPTION" ] && [ -x /usr/bin/lsb_release ]; then
+#    # Fall back to using the very slow lsb_release utility
+#    DISTRIB_DESCRIPTION=$(lsb_release -s -d)
+#fi
+#
+#re='(.*\()(.*)(\).*)'
+#if [[ $DISTRIB_DESCRIPTION =~ $re ]]; then
+#    DISTRIB_DESCRIPTION=$(printf "%s%s%s%s%s" "${BASH_REMATCH[1]}" "${YELLOW}" "${BASH_REMATCH[2]}" "${NONE}" "${BASH_REMATCH[3]}")
+#fi
+#
+#echo -e "  "$DISTRIB_DESCRIPTION "(kernel "$(uname -r)")\n"
+#
+## Update the information for next time
+#printf "DISTRIB_DESCRIPTION=%s" "$(lsb_release -s -d)" > /etc/update-motd.d/lsb-release &
