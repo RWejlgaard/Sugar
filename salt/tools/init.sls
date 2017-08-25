@@ -1,5 +1,6 @@
 install-tools:
-    {% for item in pillar['tools']['packages'] %}
-    pkg.installed:
-        - name: {{ item }}
-    {% endfor %}
+  pkg.installed:
+    - pkgs:
+      {% for item in pillar['tools']['packages'] %}
+      - {{ item }}
+      {% endfor %}
