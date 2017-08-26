@@ -1,4 +1,4 @@
 tools:
     packages:
         - 'htop'
-        - 'nc'
+        - 'netcat'
