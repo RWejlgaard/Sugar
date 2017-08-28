@@ -22,8 +22,7 @@ init.vim:
             - file: {{ pillar['global']['home'] }}/.config
             - file: {{ pillar['global']['home'] }}/.config/nvim
 
-{{ pillar['global']['home'] }}/.vim:
-    file.recurse:
-        - source: salt://neovim/files/vim
-        - require:
-            - pkg: neovim
+vundle:
+    git.latest:
+        - name: https://github.com/VundleVim/Vundle.vim.git
+        - target: {{ pillar['global']['home'] }}}/.vim/bundle/Vundle.vim
