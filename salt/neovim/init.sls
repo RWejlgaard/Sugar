@@ -1,5 +1,3 @@
-add
-
 install-neovim:
     pkgrepo.managed:
         - ppa: ppa:neovim-ppa/stable
