@@ -4,6 +4,7 @@ base:
     - tmux
     - openssh
     - tools
+    - neovim
   'ziva':
     - redis
     - apache
