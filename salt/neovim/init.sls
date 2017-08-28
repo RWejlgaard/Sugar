@@ -1,6 +1,6 @@
 install-neovim:
     pkgrepo.managed:
-        - ppa: ppa:neovim-ppa/stable
+        - ppa: neovim-ppa/stable
     pkg.installed:
         - name: neovim
         - refresh: True
