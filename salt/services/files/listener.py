@@ -4,7 +4,9 @@ import salt.client
 import salt.config
 import salt.utils.event
 import mysql.connector
+import json
 from daemon import runner
+import redis
 from lockfile import LockTimeout
 import sys
 
@@ -13,26 +15,44 @@ IGNORE_LIST = ['salt/event/exit', 'salt/auth']
 
 class Listener():
 	def __init__(self):
-		self.stdin_path = '/dev/null'
-		self.stdout_path = '/dev/tty'
-		self.stderr_path = '/dev/tty'
+		self.stdin_path = '/dev/stdin'
+		self.stdout_path = '/dev/stdout'
+		self.stderr_path = '/dev/stderr'
 		self.pidfile_path = '/tmp/sugar_listener.pid'
 		self.pidfile_timeout = 5
 
-	def handle_event(e):
-		try:
-			if e['tag'] not in IGNORE_LIST:
-				print "Got event\t{}".format(e['tag'])
-				con = mysql.connector.connect(user='events', password='N2F6jfBm', host='ymir.wejlgaard.com',
-											  database='salt')
-				cursor = con.cursor()
-				query = """INSERT INTO events (time, tag, data) VALUES (now(),"{}", "{}");""".format(str(e['tag']), str(e['data']))
-				cursor.execute(query)
-				con.commit()
-				print "Posted event\t{}".format(e['tag'])
-				con.close()
-		except Exception as e:
-			print e
+	def fire_event(self, payload, tag='salt/info'):
+		sock_dir = '/var/run/salt/minion'
+		event = salt.utils.event.SaltEvent('master', sock_dir)
+		event.fire_event(payload, tag)
+
+	def handle_event(self, sevent):
+		ret = sevent.get_event(full=True)
+		if ret is not None:
+			try:
+				if ret['tag'] not in IGNORE_LIST:
+					print "Got event\t{}".format(ret['tag'])
+					con = mysql.connector.connect(user='events', password='N2F6jfBm', host='ymir.wejlgaard.com',
+												  database='salt')
+					cursor = con.cursor()
+					query = """INSERT INTO events (time, tag, data) VALUES (now(),"{}", "{}");""".format(str(ret['tag']), str(ret['data']))
+					cursor.execute(query)
+					con.commit()
+					print "Posted event\t{}".format(ret['tag'])
+					con.close()
+			except Exception as e:
+				print e
+
+	def handle_queue(self):
+		r = redis.Redis('ziva.wejlgaard.com', 1234)
+		ticket = r.lpop('queue')
+		if ticket is not None:
+			# todo some kind of validation would be pretty kewl
+			payload = json.loads(ticket)
+			self.fire_event(payload, tag='sugar/ticket/received')
+
+
+
 
 	def run(self):
 		opts = salt.config.client_config('/etc/salt/master')
@@ -47,21 +67,22 @@ class Listener():
 
 		while True:
 			try:
-				ret = sevent.get_event(full=True)
-				if ret is None:
-					continue
-				else:
-					self.handle_event(ret)
+				self.handle_event(sevent)
+				self.handle_queue()
 				time.sleep(1)
 			except KeyboardInterrupt:
 				quit()
 
 
+
+
 if __name__ == "__main__":
-	listener = Listener()
-	daemon = runner.DaemonRunner(listener)
-	try:
-		daemon.do_action()
-	except Exception as e:
-		print e
-		daemon._start()
+	l = Listener()
+	l.run()
+	# listener = Listener()
+	# daemon = runner.DaemonRunner(listener)
+	# try:
+	# 	daemon.do_action()
+	# except Exception as e:
+	# 	print e
+	# 	daemon._start()
