@@ -10,3 +10,5 @@
 --  `data` MEDIUMTEXT NOT NULL,
 --  PRIMARY KEY (`id`));
 --GRANT ALL PRIVILEGES ON `salt`.`events` TO 'events'@'%';
+
+select * from events;
