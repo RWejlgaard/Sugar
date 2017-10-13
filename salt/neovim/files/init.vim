@@ -1,4 +1,5 @@
 set nocompatible
+set shell=bash
 filetype off
 
 if has('nvim')
@@ -34,11 +35,12 @@ Plugin 'marciomazza/vim-brogrammer-theme'
 Plugin 'nathanaelkane/vim-indent-guides'
 Plugin 'tpope/vim-surround'
 Plugin 'scrooloose/nerdcommenter'
-Plugin 'scrooloose/syntastic'
 Plugin 'tpope/vim-pathogen'
 Plugin 'davidhalter/jedi-vim'
 Plugin 'blueshirts/darcula'
 Plugin 'junegunn/fzf'
+Plugin 'dkprice/vim-easygrep'
+Plugin 'vim-syntastic/syntastic'
 
 call vundle#end()            " required
 filetype plugin indent on    " required
@@ -50,11 +52,24 @@ set backspace=2
 set laststatus=2
 set encoding=utf-8
 set mouse=a
+set clipboard=unnamed
+
+" Syntastic
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+let g:syntastic_python_checkers = ['pylint']
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
 let g:Powerline_symbols = 'fancy'
 
 nnoremap nt :NERDTreeToggle<CR>
 nnoremap qqq :qall<CR>
 nnoremap <C-f> :FZF<CR>
+nnoremap <C-S-f> :Grep 
 
 nnoremap <C-Down> :resize -1<CR>
 nnoremap <C-Up> :resize +1<CR>
